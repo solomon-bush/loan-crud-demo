@@ -12,8 +12,8 @@ let loanSchema = new mongoose.Schema({
 
     status: {
         type: String, 
-        default: 'Pending', 
-        enum: ['Pending', 'Active', 'Paidoff', 'Delinquent']
+        default: 'Active', 
+        enum: ['Active', 'Paidoff']
     },
 
     borrower: {type: mongoose.ObjectId, ref: 'User', required: true},
