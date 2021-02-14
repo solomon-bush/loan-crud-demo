@@ -1,5 +1,4 @@
 const Loan = require('./models/loan')
-const Payment= require('./models/payment')
 const User = require('./models/user')
 
 const members = [
@@ -98,12 +97,14 @@ const generateRandomLoans = (borrower) =>{
         Loan.create({amount, variant, borrower, status}).then((l =>{
             let [paymentAmounts, paidOff] = generateRandomPayments(l.amount)
             paymentAmounts.map(v =>{
-                Payment.create({amount: v, borrower, loan: l._id})              
+                l.payments.push({amount: v})
             })
+
             if(paidOff === true){
                 l.status = 'Paidoff'
-                l.save()
             }
+
+            l.save()
         }))
         i++
     }

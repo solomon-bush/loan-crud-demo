@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 let loanSchema = new mongoose.Schema({
     
     amount: {type: Number, required: true},
-
+    
     variant: {
         type: String, 
         required: true, 
@@ -17,6 +17,13 @@ let loanSchema = new mongoose.Schema({
     },
 
     borrower: {type: mongoose.ObjectId, ref: 'User', required: true},
+
+    payments: [
+        {
+            amount: {type: Number, required: true},
+            timestamp: { type: Number, default: () => { return Date.now() } },
+        }
+    ]
 
 }, { timestamps: true, versionKey: false })
 
