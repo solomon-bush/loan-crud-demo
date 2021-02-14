@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const { body, validationResult, param } = require('express-validator')
+const { body, validationResult } = require('express-validator')
 
 module.exports.set = (server) =>{
     let url = `${process.env.API_URL}/user`
@@ -32,12 +32,7 @@ module.exports.set = (server) =>{
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             } 
-            let u = new User({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                role: req.body.role,
-            })
-            console.log(u)
+            let u = new User({...req.body})
             u.save()
                 .then(data => res.send(data))
                 .catch(err => res.status(400).send(err))

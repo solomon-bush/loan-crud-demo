@@ -12,10 +12,10 @@ const connect = () => {
             authSource: process.env.DB_AUTHDB,
             readPreference: 'primary',
             useNewUrlParser: true,
-            // useUnifiedTopology: true,
+            useUnifiedTopology: true,
             useCreateIndex: true,
             useFindAndModify: false,
-            autoIndex: false, // Don't build indexes
+            autoIndex: true, // Don't build indexes
             poolSize: 10, // Maintain up to 10 socket connections
             serverSelectionTimeoutMS: 500, // Keep trying to send operations for 5 seconds
             socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
@@ -23,9 +23,9 @@ const connect = () => {
             
         }
         mongoose
-            .connect(mongoose_config_url, mongoose_config_options, 
-                (() => resolve())
-            )
+            .connect(mongoose_config_url, mongoose_config_options)
+            .then(() =>{resolve()})
+            .catch((err) =>{reject(err)})
     })
 }
 

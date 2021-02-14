@@ -4,10 +4,10 @@ let loanSchema = new mongoose.Schema({
     
     amount: {type: Number, required: true},
 
-    type: {
+    variant: {
         type: String, 
         required: true, 
-        enum: ['Home', 'Personal', 'Auto', 'Student', 'Payday'] 
+        enum: ['Home', 'Personal', 'Payday'] 
     },
 
     status: {
@@ -17,12 +17,6 @@ let loanSchema = new mongoose.Schema({
     },
 
     borrower: {type: mongoose.ObjectId, ref: 'User', required: true},
-
-    coborrowers: [{ 
-        _id: false, 
-        type: mongoose.ObjectId, 
-        ref: 'User'
-    }]
 
 }, { timestamps: true, versionKey: false })
 

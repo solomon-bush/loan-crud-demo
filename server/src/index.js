@@ -5,6 +5,7 @@ const cors = require('cors')
 // INTERNAL
 const db = require('./db')
 const routes = require('./routes/index.js')
+const mockData = require('./mockData')
 
 
 

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 let paymentSchema = new mongoose.Schema({
     
-    ammount: {type: Number, required: true},
+    amount: {type: Number, required: true},
 
-    user: {type: mongoose.ObjectId, ref: 'User', required: true},
+    borrower: {type: mongoose.ObjectId, ref: 'User', required: true},
 
     loan: {type: mongoose.ObjectId, ref: 'Loan', required: true}
 
