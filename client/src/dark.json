@@ -1,0 +1,39 @@
+  {
+    "palette": {
+        "name": "darkTheme",
+        "common": {
+            "black": "#000",
+            "white": "#fff"
+        },
+        "background": {
+            "paper": "rgba(55, 55, 55, 1)",
+            "default": "rgba(40, 40, 40, 1)"
+        },
+        "primary": {
+            "main": "rgba(34, 67, 116, 1)",
+            "contrastText": "rgba(255, 255, 255, 1)"
+        },
+        "secondary": {
+            "main": "rgba(255, 255, 255, 1)",
+            "contrastText": "rgba(188, 203, 222, 1)"
+        },
+        "error": {
+            "light": "#e57373",
+            "main": "#f44336",
+            "dark": "#d32f2f",
+            "contrastText": "rgba(255, 255, 255, 1)"
+        },
+        "text": {
+            "primary": "rgba(255, 255, 255, 1)",
+            "secondary": "rgba(255, 255, 255, 1)",
+            "disabled": "rgba(255, 255, 255, 1)",
+            "hint": "rgba(155, 155, 155, 1)"
+        },
+        "status": {
+            "assigned": "#F44336", 
+            "inStock": "#4CAF50", 
+            "inTransit": "#FF9800",  
+            "total": "#2196F3"  
+        }
+    }
+}

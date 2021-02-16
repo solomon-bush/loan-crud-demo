@@ -4,6 +4,26 @@ const { body, validationResult } = require('express-validator')
 module.exports.set = (server) =>{
     let url = `${process.env.API_URL}/user`
     
+    //MOCK Login
+    server.post(
+        `${url}/login`,
+        body(['username','role']).isString(),
+        (req, res)=>{
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            } 
+            User.find({username: req.body.username, role: req.body.role})
+                .then(data =>{
+                    data.length === 1
+                        ? res.send(data[0])
+                        : res.send(false)
+                }).catch(err =>{
+                    res.status(400).json(err)
+                })
+        }
+    )
+
     //GET ALL USERS
     server.get(`${url}`, (req,res)=>{
         User.find().then(data =>{
