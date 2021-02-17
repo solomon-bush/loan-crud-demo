@@ -10,11 +10,30 @@ class Loan {
         this.amount = loan.amount;
         this.variant = loan.variant;
         this.status = loan.status;
-        this.borrower = loan.user;
+        this.borrower = loan.borrower;
         this.payments = loan.payments;
         this.createdAt = moment(loan.createdAt).format('YYYY-MM-DD hh:mm A');
         this.updatedAt = moment(loan.createdAt).format('YYYY-MM-DD hh:mm A');
+        this.createdAtFromNow = moment(loan.createdAt).fromNow(false)
+        this.updatedAtFromNow = moment(loan.updatedAt).fromNow(false)
+    
+
+
+        this.collected = 0;
+        this.outstanding = 0;
+        this.build()
     }
+
+    build = () =>{
+        if(this.payments){
+            let collected = 0; this.payments.map(v => {collected += v.amount}); 
+            let outstanding = this.amount; this.payments.map(v => {outstanding -= v.amount}); 
+            this.collected = collected;
+            this.outstanding = outstanding;
+        }
+    }
+
+
 
     static getAll = () => {
         return new Promise((resolve, reject) => {

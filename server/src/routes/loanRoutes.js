@@ -6,7 +6,7 @@ module.exports.set = (server) =>{
 
     //GET ALL LOANS
     server.get(`${url}`, (req,res)=>{
-        Loan.find().then(data =>{
+        Loan.find().populate('borrower').then(data =>{
             res.send(data)
         }).catch(err =>{
             res.status(400).send()

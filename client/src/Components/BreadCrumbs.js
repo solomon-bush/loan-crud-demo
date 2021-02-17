@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from 'react-router-dom/Link'
+import {Link} from 'react-router-dom'
 
 // This was taken from a personal repo of Solomon Bush
 // Do not use or reproduce without consent. 

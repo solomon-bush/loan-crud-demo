@@ -30,8 +30,6 @@ export default class ProtectedRoute extends Component {
     }
 
     render() {
-        console.log(this.props)
-
         return (
             this.state.auth && ! this.props.rbac.includes(this.state.role) 
                 ? <Redirect to='/unauthorized'/>
