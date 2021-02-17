@@ -25,6 +25,9 @@ const useStyles = (theme) => ({
     display: 'flex',
     height: "100vh"
   },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
 });
 
 
@@ -39,10 +42,10 @@ class BaseRouter extends React.Component{
     const { classes } = this.props;
     return (
       <Router className={classes.root}>
-        <AppBar position='sticky' color='transparent'>
+        <AppBar position='sticky' color='transparent' style={{opa}}>
           <TopNav/>
         </AppBar>
-        <main className={classes.offset} style={{marginTop: '5vh'}}>
+        <main className={classes.content} style={{marginTop: '5vh'}}>
           <Switch>
             {/* Overide Root Path */}
             <Redirect exact from='/' to='/login'/> 

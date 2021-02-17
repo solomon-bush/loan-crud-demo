@@ -30,17 +30,17 @@ const loans = [
     {
         variant: 'Home',
         min: 200000,
-        max: 650000
+        max: 450000
     },
     {
         variant: 'Personal',
-        min: 200000,
-        max: 650000
+        min: 20000,
+        max: 150000
     },
     {
         variant: 'Payday',
-        min: 1000,
-        max: 5000
+        min: 5000,
+        max: 20000
     }
 ]
 
@@ -123,4 +123,4 @@ const build_usersLoans = () =>{
 }
 
 
-// build_usersLoans()
+build_usersLoans()
