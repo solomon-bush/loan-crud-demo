@@ -42,7 +42,7 @@ class BaseRouter extends React.Component{
     const { classes } = this.props;
     return (
       <Router className={classes.root}>
-        <AppBar position='sticky' color='transparent' style={{opa}}>
+        <AppBar position='sticky' color='transparent'>
           <TopNav/>
         </AppBar>
         <main className={classes.content} style={{marginTop: '5vh'}}>
