@@ -8,7 +8,7 @@ class User {
     constructor(user){
         this._id = user._id;
         this.username = user.username;
-        this.firstName = user.varfirstNameiant;
+        this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.role = user.role;
         this.isActive = user.isActive;
@@ -55,15 +55,16 @@ class User {
         })
     } 
     static create = (user) => {
+        console.log(user)
         return new Promise((resolve, reject) => {
             axios({
                 method: 'POST',
                 url: baseURL,
                 headers: {"Content-Type": "application/x-www-form-urlencoded",},
-                data: qs.stringify({user})
+                data: qs.stringify({...user})
             }).then(response =>{
                 resolve(new User({...response.data}))
-            })
+            }).catch(() => reject())
         })
     }
     static update = (_id, user) => {

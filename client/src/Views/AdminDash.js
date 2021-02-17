@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class LoanInfo extends Component {
+export default class AdminDash extends Component {
     render() {
         return (
             <div>
-                Loan Info
+                <h1>ADMIN</h1> 
             </div>
         )
     }

@@ -1,47 +1,68 @@
-import React from "react";import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-  } from "react-router-dom";
-
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { withStyles } from '@material-ui/core/styles';
 import ProtectedRoute from './ProtectedRoute'
-import LoginPage from '../Views/login.js';
-import RegisterPage from '../Views/register'
-import BorrowerDash from '../Views/Borrower/dash'
-import LoanCreate from '../Views/Loan/create'
-import LoanInfo from '../Views/Loan/info'
-import LoanPayment from '../Views/Loan/payment'
-import AdminDash from '../Views/Admin/dash'
-import AdminLoans from '../Views/Admin/loans'
-import AdminUsers from '../Views/Admin/users'
+import Login from '../Views/Login'
+import Register from '../Views/Register'
+import AdminDash from '../Views/AdminDash'
+import MemberDash from '../Views/MemberDash'
+import AdminLoanView from '../Views/AdminLoanView'
+import AdminMemberView from '../Views/AdminMemberView'
+import Unauthorized from '../Views/Unauthorized'
+import {authPayload} from '../session'
+import TopNav from '../Components/TopNav'
+import { AppBar } from "@material-ui/core";
 
- 
+
+const useStyles = (theme) => ({
+  offset: theme.mixins.toolbar,
+  root: {
+    display: 'flex',
+    height: "100vh"
+  },
+});
 
 
- class BaseRouter extends React.Component{
-    render(){
-      return (
-        <Router>
-          <Switch>
-            {/* Login */}
-            <Route exact path='/' component={LoginPage}/>
-            <Route exact path='/register' component={RegisterPage}/>
-            
-            
-            {/* Borrower Routes */}
-            <Route exact path='/borrower/:_id' component={BorrowerDash}/>
-            <Route exact path='/borrower/:_id/loan/create' component={LoanCreate}/>
-            <Route exact path='/borrower/:_id/loan/:_id' component={LoanInfo}/>
-            <Route exact path='/borrower/:_id/loan/:_id/payment' component={LoanPayment}/>
-
-            {/* Admin Routes */}
-            <Route exact path='/admin/:_id' component={AdminDash}/>
-            <Route exact path='/admin/:_id/loans' component={AdminLoans}/>
-            <Route exact path='/admin/:_id/users' component={AdminUsers}/>
-          </Switch>
-        </Router>
-      );
+class BaseRouter extends React.Component{
+  componentDidMount(){
+    if(localStorage.getItem('_id') && localStorage.getItem('role')){
+      authPayload.next({auth:true, id: localStorage.getItem('_id'), role: localStorage.getItem('role')})
     }
   }
-  
-  export default BaseRouter;
+  render(){
+
+    const { classes } = this.props;
+    return (
+      <Router className={classes.root}>
+        <AppBar position='sticky' color='transparent'>
+          <TopNav/>
+        </AppBar>
+        <main className={classes.offset} style={{marginTop: '5vh'}}>
+          <Switch>
+            {/* Overide Root Path */}
+            <Redirect exact from='/' to='/login'/> 
+            {/* Unathorized */}
+            <Route exact path='/unauthorized' component={Unauthorized}/>
+            {/* Login */}
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register}/>
+            {/* Member */}
+            <ProtectedRoute exact path='/member/:_id' component={MemberDash} rbac={['member']} />
+
+            {/* Admin */}
+            <ProtectedRoute exact path='/admin/:_id' component={AdminDash} rbac={['admin']} />
+            <ProtectedRoute exact path='/admin/:_id/member' component={AdminMemberView} rbac={['admin']} />
+            <ProtectedRoute exact path='/admin/:_id/loan' component={AdminLoanView} rbac={['admin']} />
+          </Switch>
+        </main>
+      </Router>
+    );
+  }
+}
+
+export default withStyles(useStyles)(BaseRouter);

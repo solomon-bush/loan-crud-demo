@@ -5,8 +5,11 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import dark from './dark.json'
 import BaseRouter from './Router/BaseRouter'
+import { Container } from '@material-ui/core';
+import {authPayload} from './session'
 
 const darktheme = createMuiTheme({palette: dark.palette})
+
 
 class App extends React.Component{
   constructor(){
@@ -22,10 +25,10 @@ class App extends React.Component{
 
   render(){
     return (
-      <MuiThemeProvider theme={darktheme}>
-          <CssBaseline />
-          <BaseRouter/>
-      </MuiThemeProvider>
+        <MuiThemeProvider theme={darktheme}>
+            <CssBaseline />
+            <BaseRouter/>
+        </MuiThemeProvider>
     );
   }
  

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
-export default class AdminUsersView extends Component {
+export default class AdminMemberView extends Component {
     render() {
         return (
             <div>
-                Admin Users View
+                <h1>ADMIN MEMBERS</h1> 
+                
             </div>
         )
     }
