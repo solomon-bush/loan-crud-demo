@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Loan = require('../models/loan')
 const { body, validationResult } = require('express-validator')
 
 module.exports.set = (server) =>{
@@ -36,6 +37,15 @@ module.exports.set = (server) =>{
     //GET USER BY ID
     server.get(`${url}/:_id`, (req,res)=>{
         User.findById(req.params._id).then(data =>{
+            res.send(data)
+        }).catch(err =>{
+            res.status(400).json(err)
+        })
+    })
+
+    //GET USER LOANS
+    server.get(`${url}/:_id/loan`, (req,res)=>{
+        Loan.find({borrower: req.params._id}).populate('borrower').then(data =>{
             res.send(data)
         }).catch(err =>{
             res.status(400).json(err)

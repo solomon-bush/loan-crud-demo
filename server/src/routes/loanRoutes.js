@@ -36,7 +36,6 @@ module.exports.set = (server) =>{
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             } 
-            console.log('test')
             Loan.create({
                 amount: req.body.amount,
                 variant: req.body.variant,
@@ -53,8 +52,7 @@ module.exports.set = (server) =>{
         `${url}/:_id`,
         body('amount').isNumeric(),
         (req,res)=>{
-
-
+            console.log(req.body)
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });

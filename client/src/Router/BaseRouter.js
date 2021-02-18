@@ -11,6 +11,9 @@ import Login from '../Views/Login'
 import Register from '../Views/Register'
 import AdminDash from '../Views/AdminDash'
 import MemberDash from '../Views/MemberDash'
+import MemberNewLoan from '../Views/MemberNewLoan'
+import MemberNewPayment from '../Views/MemberNewPayment'
+
 import AdminLoanView from '../Views/AdminLoanView'
 import AdminMemberView from '../Views/AdminMemberView'
 import Unauthorized from '../Views/Unauthorized'
@@ -42,7 +45,7 @@ class BaseRouter extends React.Component{
     const { classes } = this.props;
     return (
       <Router className={classes.root}>
-        <AppBar position='sticky' color='transparent'>
+        <AppBar position='sticky' color='default'>
           <TopNav/>
         </AppBar>
         <main className={classes.content} style={{marginTop: '5vh'}}>
@@ -56,6 +59,9 @@ class BaseRouter extends React.Component{
             <Route exact path='/register' component={Register}/>
             {/* Member */}
             <ProtectedRoute exact path='/member/:_id' component={MemberDash} rbac={['member']} />
+            <ProtectedRoute exact path='/member/:_id/new-loan' component={MemberNewLoan} rbac={['member']} />
+            <ProtectedRoute exact path='/member/:_id/payment' component={MemberNewPayment} rbac={['member']} />
+            <ProtectedRoute exact path='/member/:_id/loan/:_id' component={MemberDash} rbac={['member']} />
 
             {/* Admin */}
             <ProtectedRoute exact path='/admin/:_id' component={AdminDash} rbac={['admin']} />

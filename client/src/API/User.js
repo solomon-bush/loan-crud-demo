@@ -1,6 +1,7 @@
 import qs from 'qs'
 import axios from 'axios'
 import moment from 'moment'
+import Loan from './Loan'
 
 const baseURL = `${process.env.REACT_APP_API}/user`
 
@@ -51,6 +52,18 @@ class User {
                 url: `${baseURL}/${_id}`
             }).then(response =>{
                 resolve(new User({...response.data}))
+            })
+        })
+    } 
+    static getLoans = (_id) => {
+        return new Promise((resolve, reject) => {
+            axios({
+                method: 'GET',
+                url: `${baseURL}/${_id}/loan`
+            }).then(response =>{
+                let loans = []
+                response.data.forEach(l => { loans.push(new Loan({ ...l })) })
+                resolve(loans)
             })
         })
     } 

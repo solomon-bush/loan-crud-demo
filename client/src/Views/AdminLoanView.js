@@ -14,6 +14,7 @@ export default withRouter(class AdminLoanView extends Component {
         this.state = {
             user: null,
             loans: [],
+            members: [],
             isLoading: true
         }
     }
